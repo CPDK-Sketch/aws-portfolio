@@ -1,0 +1,37 @@
+**Step 1: Create VPC (Virtual Private Cloud)**
+
+1. **Go to VPC Dashboard:**
+   - In the AWS Console, search for **VPC** and click **Create VPC**.
+
+2. **VPC Configuration:**
+   - **CIDR Block**: `10.0.0.0/16` (This gives you an IP range to work with).
+   - **Name**: `MyVPC`.
+   - Select **Create VPC**.
+
+3. **Subnets:**
+   - Create a **public subnet** with CIDR `10.0.0.0/24`.
+   - Ensure **Auto-assign public IP** is enabled for the public subnet.
+   - Click **Create Subnet**.
+
+4. **Internet Gateway:**
+   - Go to **Internet Gateways** → **Create Internet Gateway**.
+   - Name it `MyGateway` and attach it to your VPC.
+**Step 2: Launch EC2 Instance Inside VPC**
+
+1. **Launch EC2 Instance:**
+   - Go to **EC2** → **Launch Instance**.
+   - Choose **Amazon Linux 2** as the AMI.
+   - Select **t2.micro** instance type (eligible for the free tier).
+   - In **Configure Instance**:
+     - Under **Network**, select the VPC you just created.
+     - Choose the **Public Subnet**.
+   - **Security Group**: Add rules to allow **SSH** (port 22) and **HTTP** (port 80).
+   - **Key Pair**: Create a new key pair (or use an existing one) to SSH into the instance.
+   - Click **Launch**.
+
+2. **SSH into EC2 Instance:**
+   - Once the instance is running, connect to it via SSH:
+     ```bash
+     ssh -i your-key.pem ec2-user@<your-ec2-public-ip>
+
+  STep 3 : README.md
