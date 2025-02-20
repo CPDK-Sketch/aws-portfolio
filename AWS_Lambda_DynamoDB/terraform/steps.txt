@@ -1,0 +1,49 @@
+Step 1: Set Up DynamoDB Table
+Go to DynamoDB:
+
+In the AWS Console, search for DynamoDB and click Create Table.
+Table Configuration:
+
+Table Name: UserTable
+Partition Key: userID (Type: String)
+Sort Key: timestamp (Type: String, optional)
+Click Create.
+Step 2: Create Lambda Function
+Go to Lambda:
+
+In the AWS Console, search for Lambda and click Create Function.
+Choose Author from Scratch.
+Function Name: UserDataProcessor
+Runtime: Choose Python 3.x (or Node.js if you prefer).
+Permissions: Choose Create a new role with basic Lambda permissions.
+Click Create Function.
+Lambda Code Example (Python):
+
+.pycode -  the Lambda function code to insert data into DynamoDB:
+Deploy Lambda:
+After entering the code, click Deploy.
+Step 3: Create API Gateway to Trigger Lambda
+Go to API Gateway:
+
+In the AWS Console, search for API Gateway and create a new REST API.
+Create Resource and Method:
+
+Click on Actions → Create Resource.
+Name the resource /user.
+Create POST method under /user resource.
+Set the integration type to Lambda Function, and select the Lambda function you created earlier.
+Enable CORS for cross-origin requests if needed.
+Click Deploy API and create a new stage (e.g., prod).
+Invoke API:
+
+Now you have an endpoint URL like https://xyz123.execute-api.us-east-1.amazonaws.com/prod/user.
+Use this endpoint to send data to your Lambda function.
+Step 4: Test the Lambda + DynamoDB
+Use Postman or curl to test the API by sending a POST request to the API Gateway URL with the following JSON body:
+
+json
+
+{
+  "userID": "user123",
+  "name": "John Doe"
+}
