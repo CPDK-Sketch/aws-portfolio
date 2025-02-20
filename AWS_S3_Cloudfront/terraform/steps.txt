@@ -1,0 +1,57 @@
+Step 1: Set Up S3 Bucket
+Login to AWS Console:
+
+Go to AWS Console and log in.
+Create S3 Bucket:
+
+Navigate to S3 in the AWS Console and click Create Bucket.
+Bucket Name: my-website-bucket-lakshmi (use a unique name).
+Region: Choose EU (London) or any preferred region.
+Block Public Access: Uncheck this (to allow public access).
+Click Create.
+Upload Files to S3:
+
+Go into the S3 bucket you created.
+Click Upload and add the following files:
+index.html (main webpage)
+style.css (CSS styles)
+app.js (JavaScript logic)
+Enable Static Website Hosting:
+
+In the Properties tab of your bucket, scroll to Static Website Hosting.
+Enable it and enter:
+Index Document: index.html
+Error Document: error.html (if available).
+Save changes.
+Bucket Policy for Public Access:
+
+In the Permissions tab, go to Bucket Policy and paste the following policy (ensure the bucket name matches):
+json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::my-website-bucket-lakshmi/*"
+    }
+  ]
+}
+
+
+Step 2: Set Up CloudFront Distribution
+Create CloudFront Distribution:
+
+Go to CloudFront in the AWS Console → Create Distribution.
+Choose Web under delivery method.
+For Origin Domain Name, select your S3 bucket.
+Set Viewer Protocol Policy to Redirect HTTP to HTTPS.
+Leave other settings as default and click Create Distribution.
+Link Domain (Optional):
+
+If you want to link a custom domain (e.g., www.mywebsite.com), use Route 53 for DNS management.
+Go to Route 53 → Create Hosted Zone and add your domain.
+For CloudFront, add a CNAME record pointing to your CloudFront distribution domain.
+
+Step 3: README.MD
